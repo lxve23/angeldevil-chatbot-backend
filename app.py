@@ -3,7 +3,7 @@ from flask_cors import CORS
 from chat import newMessage
 
 app = Flask(__name__)
-CORS(app, origins=["https://lxve23.github.io/"])
+CORS(app)
 
 @app.route("/chat", methods=["POST"])
 def gpt_call():  
@@ -11,7 +11,7 @@ def gpt_call():
     ai_response = newMessage(data)
 
     try:
-        angel_response, devil_response = ai_response.split("--SPLIT--", 1)
+        angel_response, devil_response = ai_response.split("---SPLIT---", 1)
     except ValueError:
         return jsonify({"error": "Error while responding"})
     
